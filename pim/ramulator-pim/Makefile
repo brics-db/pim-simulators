@@ -3,8 +3,7 @@ OBJDIR := obj
 MAIN := $(SRCDIR)/Main.cpp
 SRCS := $(filter-out $(MAIN) $(SRCDIR)/Gem5Wrapper.cpp, $(wildcard $(SRCDIR)/*.cpp))
 OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
-RAMULATORDIR := /home/tk4/git/brics-db.pim/pim-simulators/pim/DRAMPower
-
+DRAMPOWERDIR := ../DRAMPower
 
 # Ramulator currently supports g++ 5.1+ or clang++ 3.4+.  It will NOT work with
 #   g++ 4.x due to an internal compiler error when processing lambda functions.
@@ -12,7 +11,7 @@ RAMULATORDIR := /home/tk4/git/brics-db.pim/pim-simulators/pim/DRAMPower
 CXX := c++
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S), Linux)
-  CXXFLAGS := -O3 -std=c++11 -g -Wall -w -I$(RAMULATORDIR)/src -L$(RAMULATORDIR)/src
+  CXXFLAGS := -O3 -std=c++11 -g -Wall -w -I$(DRAMPOWERDIR)/src -L$(DRAMPOWERDIR)/src
   LDFLAGS := -lboost_program_options -ldrampowerxml -ldrampower -lxerces-c
 endif
 ifeq ($(UNAME_S), Darwin)
