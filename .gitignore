@@ -1,0 +1,12 @@
+/pim/DRAMPower/drampower
+/pim/DRAMPower/traces
+/pim/DRAMPower/traces.zip
+/pim/DRAMPower/config.log
+/pim/ramulator-pim/ramulator
+/zsim-ramulator/build
+*.o
+*.d
+*.a
+.depend
+.sconf_temp
+.sconsign.dblite

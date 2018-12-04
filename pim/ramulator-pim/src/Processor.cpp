@@ -1056,8 +1056,6 @@ bool Trace::get_pisa_request(long& bubble_cnt, long& req_addr, Request::Type& re
 
 bool Trace::get_zsim_request(long& bubble_cnt, long& req_addr, Request::Type& req_type, unsigned& cpu_id){
     string linebuffer;
-    string linebuffer;
-
 
     if(getline(file, linebuffer)){
         if (linebuffer.length() == 0) return false;
