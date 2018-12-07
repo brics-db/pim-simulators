@@ -1,8 +1,10 @@
-/pim/DRAMPower/drampower
-/pim/DRAMPower/traces
-/pim/DRAMPower/traces.zip
-/pim/DRAMPower/config.log
-/pim/ramulator-pim/ramulator
+/common/DRAMPower/drampower
+/common/DRAMPower/traces
+/common/DRAMPower/traces.zip
+/common/DRAMPower/config.log
+/common/ramulator-pim/ramulator
+/pim/ramulator-pim/build
+/host/ramulator-host/build
 /zsim-ramulator/build
 /zsim-ramulator/misc/hooks/libzsim_jni.so
 /zsim-ramulator/misc/hooks/test.class

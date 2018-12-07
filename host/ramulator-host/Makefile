@@ -3,7 +3,7 @@ OBJDIR := obj
 MAIN := $(SRCDIR)/Main.cpp
 SRCS := $(filter-out $(MAIN) $(SRCDIR)/Gem5Wrapper.cpp, $(wildcard $(SRCDIR)/*.cpp))
 OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
-DRAMPOWERDIR := ../../pim/DRAMPower
+DRAMPOWERDIR := ../../common/DRAMPower
 
 # Ramulator currently supports g++ 5.1+ or clang++ 3.4+.  It will NOT work with
 #   g++ 4.x due to an internal compiler error when processing lambda functions.
