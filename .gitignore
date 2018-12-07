@@ -4,6 +4,14 @@
 /pim/DRAMPower/config.log
 /pim/ramulator-pim/ramulator
 /zsim-ramulator/build
+/zsim-ramulator/misc/hooks/libzsim_jni.so
+/zsim-ramulator/misc/hooks/test.class
+/zsim-ramulator/misc/hooks/test_c
+/zsim-ramulator/misc/hooks/test_cpp
+/zsim-ramulator/misc/hooks/test_fortran
+/zsim-ramulator/misc/hooks/test_lois
+/zsim-ramulator/misc/hooks/zsim.class
+/zsim-ramulator/misc/hooks/zsim_jni.h
 *.o
 *.d
 *.a
