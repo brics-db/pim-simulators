@@ -124,12 +124,12 @@ def buildSim(cppFlags, dir, type, pgo=None):
         env["CPPPATH"] += [joinpath(LIBCONFIGPATH, "include")]
 
 
-    if "POLARSSLPATH" in os.environ:
-        POLARSSLPATH = os.environ["POLARSSLPATH"]
-        env["PINLIBPATH"] += [joinpath(POLARSSLPATH, "library")]
-        env["CPPPATH"] += [joinpath(POLARSSLPATH, "include")]
-        env["PINLIBS"] += ["polarssl"]
-        env["CPPFLAGS"] += " -D_WITH_POLARSSL_=1 "
+    if "MBEDTLSPATH" in os.environ:
+        MBEDTLSPATH = os.environ["MBEDTLSPATH"]
+        env["PINLIBPATH"] += [joinpath(MBEDTLSPATH, "library")]
+        env["CPPPATH"] += [joinpath(MBEDTLSPATH, "include")]
+        env["PINLIBS"] += ["mbedtls"]
+        env["CPPFLAGS"] += " -D_WITH_MBEDTLS_=1 "
 
     # Only include DRAMSim if available
     if "DRAMSIMPATH" in os.environ:

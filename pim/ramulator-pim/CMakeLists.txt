@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.8 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.11 FATAL_ERROR)
 
 IF(POLICY CMP0048)
     CMAKE_POLICY(SET CMP0048 NEW)

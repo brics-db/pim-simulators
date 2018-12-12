@@ -123,9 +123,9 @@ uint64_t H3HashFamily::hash(uint32_t id, uint64_t val) {
     return res;
 }
 
-#if _WITH_POLARSSL_
+#if _WITH_MBEDTLS_
 
-#include "polarssl/sha1.h"
+#include "mbedtls/sha1.h"
 
 SHA1HashFamily::SHA1HashFamily(int numFunctions) : numFuncs(numFunctions) {
     memoizedVal = 0;
@@ -151,7 +151,7 @@ uint64_t SHA1HashFamily::hash(uint32_t id, uint64_t val) {
                     buffer[j] ^= memoizedHashes[(i-1)*5 + j];
                 }
             }
-            sha1((unsigned char*) buffer, sizeof(buffer), (unsigned char*) &(memoizedHashes[i*5]));
+            mbedtls_sha1_ret((unsigned char*) buffer, sizeof(buffer), (unsigned char*) &(memoizedHashes[i*5]));
         }
         /*info("SHA1: 0x%lx:", val);
         for (int i = 0; i < numFuncs; i++) {
@@ -163,7 +163,7 @@ uint64_t SHA1HashFamily::hash(uint32_t id, uint64_t val) {
     }
 }
 
-#else  // _WITH_POLARSSL_
+#else  // _WITH_MBEDTLS_
 
 SHA1HashFamily::SHA1HashFamily(int numFunctions) {
     panic("Cannot use SHA1HashFamily, zsim was not compiled with PolarSSL");
@@ -174,4 +174,4 @@ uint64_t SHA1HashFamily::hash(uint32_t id, uint64_t val) {
     return 0;
 }
 
-#endif  // _WITH_POLARSSL_
+#endif  // _WITH_MBEDTLS_
