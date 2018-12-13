@@ -72,10 +72,6 @@ public:
         : is_first_command(true), addr_vec(addr_vec), coreid(coreid), type(type), callback(callback) {}
 
     Request() {}
-
-
-
-
 };
 
 } /*namespace ramulator*/

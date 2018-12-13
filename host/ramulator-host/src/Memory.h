@@ -121,8 +121,8 @@ public:
     };
 
     void set_is_stalled(){
-
     }
+
     vector<int> free_physical_pages;
     long free_physical_pages_remaining;
     map<pair<int, long>, long> page_translation;

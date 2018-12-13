@@ -1,5 +1,4 @@
 #include "StatType.h"
-#include <iostream>
 namespace Stats {
 
 // Statistics list
@@ -134,7 +133,6 @@ Histogram::sample(Counter val, int number)
 
     size_type index =
         (int64_t)std::floor((val - min_bucket) / bucket_size);
-
 
     assert(index >= 0 && index < size());
     cvec[index] += number;

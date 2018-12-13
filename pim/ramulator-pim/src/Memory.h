@@ -527,9 +527,7 @@ public:
               ++incoming_read_reqs_per_channel[req.addr_vec[int(T::Level::Channel)]];
             }
             if (req.type == Request::Type::WRITE) {
-              cout << "Here 1 \n";
               ++num_write_requests[coreid];
-              cout << "Here 2 \n";
             }
             ++incoming_requests_per_channel[req.addr_vec[int(T::Level::Channel)]];
             return true;
@@ -543,7 +541,6 @@ public:
         int reqs = 0;
         for (auto ctrl: ctrls)
             reqs += ctrl->readq.size() + ctrl->writeq.size() + ctrl->otherq.size() + ctrl->pending.size();
-
         return reqs;
     }
 

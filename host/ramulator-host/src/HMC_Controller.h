@@ -567,9 +567,8 @@ public:
     }
 
     bool receive (Packet& packet) {
-
-
       assert(packet.type == Packet::Type::REQUEST);
+
       Request& req = packet.req;
       req.burst_count = channel->spec->burst_count;
       req.transaction_bytes = channel->spec->payload_flits * 16;
@@ -577,6 +576,7 @@ public:
       debug_hmc("req.reqid %d, req.coreid %d", req.reqid, req.coreid);
       // buffer packet, for future response packet
       incoming_packets_buffer[req.reqid] = packet;
+
       return enqueue(req);
     }
 

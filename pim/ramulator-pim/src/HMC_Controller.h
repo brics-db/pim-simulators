@@ -666,7 +666,6 @@ public:
 
     bool enqueue(Request& req)
     {
-
         Queue& queue = get_queue(req.type);
         if(!pim_mode_enabled){
             if (queue.max == queue.size())
@@ -741,7 +740,7 @@ public:
                 Packet packet = form_response_packet(req);
                 response_packets_buffer.push_back(packet);
                 pending.pop_front();
-                }
+            }
           }
         }
 
@@ -786,7 +785,6 @@ public:
           if (req->type == Request::Type::READ || req->type == Request::Type::WRITE) {
             channel->update_serving_requests(req->addr_vec.data(), 1, clk);
           }
-
           if (req->type == Request::Type::READ) {
             (*queueing_latency_sum) += clk - req->arrive;
             if (is_row_hit(req)) {
@@ -801,7 +799,6 @@ public:
                 ++(*read_row_misses)[coreid];
                 ++(*row_misses);
                 debug_hmc("row miss");
-
             }
             (*read_transaction_bytes) += req->transaction_bytes;
           } else if (req->type == Request::Type::WRITE) {
@@ -840,7 +837,6 @@ public:
             if (req->burst_count == 0) {
               Packet packet = form_response_packet(*req);
               response_packets_buffer.push_back(packet);
-              //cerr << "here wr \n";
               channel->update_serving_requests(req->addr_vec.data(), -1, clk);
             }
         }

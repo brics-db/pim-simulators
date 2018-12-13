@@ -1,5 +1,4 @@
 #include "StatType.h"
-
 namespace Stats {
 
 // Statistics list

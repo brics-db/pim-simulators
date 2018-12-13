@@ -190,7 +190,6 @@ Cache::Cache(int size, int assoc, int block_size,
                          ;
 }
 
-
 bool Cache::send(Request req) {
   debug_cache("level %d req.addr %lx req.type %d, index %d, tag %ld",
       int(level), req.addr, int(req.type), get_index(req.addr),

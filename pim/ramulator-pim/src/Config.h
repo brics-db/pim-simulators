@@ -19,6 +19,7 @@ public:
         ZSIM,
         PIN
     } format;
+
 private:
     std::map<std::string, std::string> options;
     int stacks;
@@ -84,7 +85,6 @@ public:
 
     void set_core_num(int _core_num) {core_num = _core_num;}
     void set_cacheline_size(int _cacheline_size) {cacheline_size = _cacheline_size;}
-
 
     int get_int_value(const std::string& name) const {
       assert(options.find(name) != options.end() && "can't find this argument");

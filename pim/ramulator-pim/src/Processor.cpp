@@ -1,7 +1,6 @@
 #include "Processor.h"
 #include <cassert>
 
-
 using namespace std;
 using namespace ramulator;
 
@@ -227,7 +226,6 @@ Processor::Processor(const Config& configs,
               core -> req_type = core -> rqst_queue.req_type.front();
               core -> more_reqs = true;
               core->rqst_queue.pop_front();
-
           }
           else{
               core -> more_reqs = false;
@@ -257,7 +255,7 @@ Processor::Processor(const Config& configs,
             .desc("final ipc number")
             .precision(6)
             ;
-// regStats
+  // regStats
   total_time.name("total_time")
             .desc("Total Time (ns)")
             .precision(6)
@@ -407,7 +405,6 @@ bool Processor::finished() {
         return false;
       }
     }
-
     calc_stats();
     return true;
   }
@@ -459,8 +456,8 @@ Core::Core(const Config& configs, int coreid, function<bool(Request)> send_next,
   //cout << "Number of cache lines: " << pim_private_cache.number_cache_lines  << endl
 
   //trace.expected_limit_insts = configs.get_expected_limit_insts();
- // pim_mode_enabled = configs.pim_mode_enabled();
- // trace.expected_limit_insts = pim_mode_enabled;
+  // pim_mode_enabled = configs.pim_mode_enabled();
+  // trace.expected_limit_insts = pim_mode_enabled;
   // Build cache hierarchy
   if (no_core_caches) {
     send = send_next;
@@ -495,14 +492,11 @@ Core::Core(const Config& configs, int coreid, function<bool(Request)> send_next,
               .precision(0)
               ;
 
-
-
   memory_access_cycles.name("memory_access_cycles_core_" + to_string(id))
                       .desc("memory access cycles in memory time domain")
                       .precision(0)
                       ;
   memory_access_cycles = 0;
-
   cpu_inst.name("cpu_instructions_core_" + to_string(id))
           .desc("cpu instruction number")
           .precision(0)
@@ -890,7 +884,6 @@ void Window::set_ready(long addr, int mask)
 
 Trace::Trace(const string& trace_fname) : file(trace_fname), trace_name(trace_fname)
 {
-
 #ifndef MAX_NUMBER_CORES
     #define MAX_NUMBER_CORES 16
 #endif

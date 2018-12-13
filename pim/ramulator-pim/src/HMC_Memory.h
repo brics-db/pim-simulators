@@ -18,7 +18,6 @@ class Memory<HMC, Controller> : public MemoryBase
 {
 public:
   long max_address;
-
   long capacity_per_stack;
   ScalarStat dram_capacity;
   ScalarStat num_dram_cycles;
@@ -591,7 +590,6 @@ public:
         req.initial_addr = req.addr;
         req.addr_vec.resize(addr_bits.size());
         req.reqid = mem_req_count;
-
         clear_higher_bits(req.addr, max_address-1ll);
         long addr = req.addr;
         long coreid = req.coreid;
@@ -602,8 +600,8 @@ public:
           case int(Type::RoCoBaVa): {
             int max_block_col_bits =  spec->maxblock_entry.flit_num_bits - tx_bits;
             req.addr_vec[int(HMC::Level::Column)] = slice_lower_bits(addr, max_block_col_bits);
-            req.addr_vec[int(HMC::Level::Vault)]  = slice_lower_bits(addr, addr_bits[int(HMC::Level::Vault)]);
-            req.addr_vec[int(HMC::Level::Bank)]   = slice_lower_bits(addr, addr_bits[int(HMC::Level::Bank)]);
+            req.addr_vec[int(HMC::Level::Vault)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::Vault)]);
+            req.addr_vec[int(HMC::Level::Bank)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::Bank)]);
             req.addr_vec[int(HMC::Level::BankGroup)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::BankGroup)]);
             int column_MSB_bits = slice_lower_bits(addr, addr_bits[int(HMC::Level::Column)] - max_block_col_bits);
             req.addr_vec[int(HMC::Level::Column)] = req.addr_vec[int(HMC::Level::Column)] | (column_MSB_bits << max_block_col_bits);
@@ -738,14 +736,7 @@ public:
       req_queue_length_avg = req_queue_length_sum.value() / dram_cycles;
       read_req_queue_length_avg = read_req_queue_length_sum.value() / dram_cycles;
       write_req_queue_length_avg = write_req_queue_length_sum.value() / dram_cycles;
-
-      //for(int i = 0; i< 32; i++)
-      //    cout << "vault " << i << ": " << requests_per_vault[i] << endl;
-      // cout << endl;
-
-      //cout << "address bits: " << addr_bits[int(HMC::Level::Vault)] << endl;
     }
-
 
     long page_allocator(long addr, int coreid) {
         long virtual_page_number = addr >> 12;
@@ -815,7 +806,6 @@ private:
 public:
     int slice_lower_bits(long& addr, int bits)
     {
-
         int lbits = addr & ((1<<bits) - 1);
         addr >>= bits;
         return lbits;
@@ -824,7 +814,6 @@ public:
     {
         addr >>= bits;
     }
-
     void clear_higher_bits(long& addr, long mask) {
         addr = (addr & mask);
     }

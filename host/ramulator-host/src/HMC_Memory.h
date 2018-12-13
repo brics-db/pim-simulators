@@ -75,7 +75,6 @@ protected:
 
   long mem_req_count = 0;
 
-
 public:
     long clk = 0;
 
@@ -552,8 +551,6 @@ public:
       }
     }
 
-
-
     Packet form_request_packet(const Request& req) {
       // All packets sent from host controller are Request packets
       long addr = req.addr;
@@ -601,10 +598,8 @@ public:
       }
       assert(packet.type == Packet::Type::RESPONSE);
       tags_pools[packet.header.SLID.value].push_back(packet.header.TAG.value);
-
       Request& req = packet.req;
       req.depart_hmc = clk;
-
       if (req.type == Request::Type::READ) {
         read_latency_sum += req.depart_hmc - req.arrive_hmc;
         debug_hmc("read_latency: %ld", req.depart_hmc - req.arrive_hmc);
@@ -614,7 +609,6 @@ public:
         debug_hmc("response_packet_latency: %ld", req.depart_hmc - req.depart);
         req.callback(req);
       }
-
     }
 
     bool send(Request req)
@@ -630,26 +624,16 @@ public:
 
         // Each transaction size is 2^tx_bits, so first clear the lowest tx_bits bits
         clear_lower_bits(addr, tx_bits);
-
         switch(int(type)) {
           case int(Type::RoCoBaVa): {
-            int max_block_col_bits =
-                spec->maxblock_entry.flit_num_bits - tx_bits;
-            req.addr_vec[int(HMC::Level::Column)] =
-                slice_lower_bits(addr, max_block_col_bits);
-            req.addr_vec[int(HMC::Level::Vault)] =
-                slice_lower_bits(addr, addr_bits[int(HMC::Level::Vault)]);
-            req.addr_vec[int(HMC::Level::Bank)] =
-                slice_lower_bits(addr, addr_bits[int(HMC::Level::Bank)]);
-            req.addr_vec[int(HMC::Level::BankGroup)] =
-                slice_lower_bits(addr, addr_bits[int(HMC::Level::BankGroup)]);
-            int column_MSB_bits =
-              slice_lower_bits(
-                  addr, addr_bits[int(HMC::Level::Column)] - max_block_col_bits);
-            req.addr_vec[int(HMC::Level::Column)] =
-              req.addr_vec[int(HMC::Level::Column)] | (column_MSB_bits << max_block_col_bits);
-            req.addr_vec[int(HMC::Level::Row)] =
-                slice_lower_bits(addr, addr_bits[int(HMC::Level::Row)]);
+            int max_block_col_bits =  spec->maxblock_entry.flit_num_bits - tx_bits;
+            req.addr_vec[int(HMC::Level::Column)] = slice_lower_bits(addr, max_block_col_bits);
+            req.addr_vec[int(HMC::Level::Vault)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::Vault)]);
+            req.addr_vec[int(HMC::Level::Bank)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::Bank)]);
+            req.addr_vec[int(HMC::Level::BankGroup)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::BankGroup)]);
+            int column_MSB_bits = slice_lower_bits(addr, addr_bits[int(HMC::Level::Column)] - max_block_col_bits);
+            req.addr_vec[int(HMC::Level::Column)] = req.addr_vec[int(HMC::Level::Column)] | (column_MSB_bits << max_block_col_bits);
+            req.addr_vec[int(HMC::Level::Row)] = slice_lower_bits(addr, addr_bits[int(HMC::Level::Row)]);
           }
           break;
           case int(Type::RoBaCoVa): {

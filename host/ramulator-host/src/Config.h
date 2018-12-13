@@ -44,6 +44,15 @@ public:
       }
     }
 
+    void set_trace_format(std::string trace){
+        if(trace.find("pisa") != std::string::npos)
+            format = Format::PISA;
+        else if(trace.find("zsim") != std::string::npos)
+            format = Format::ZSIM;
+        else
+            format = Format::PIN;
+    }
+
     void parse_to_const(const std::string& name, const std::string& value);
 
     bool contains(const std::string& name) const {
@@ -71,15 +80,6 @@ public:
     void set_core_num(int _core_num) {core_num = _core_num;}
     void set_cacheline_size(int _cacheline_size) {cacheline_size = _cacheline_size;}
 
-    void set_trace_format(std::string trace){
-        if(trace.find("pisa") != std::string::npos)
-            format = Format::PISA;
-        else if(trace.find("zsim") != std::string::npos)
-            format = Format::ZSIM;
-        else
-            format = Format::PIN;
-    }
-
     int get_int_value(const std::string& name) const {
       assert(options.find(name) != options.end() && "can't find this argument");
       return atoi(options.find(name)->second.c_str());
@@ -88,12 +88,10 @@ public:
     int get_channels() const {return get_int_value("channels");}
     int get_subarrays() const {return get_int_value("subarrays");}
     int get_ranks() const {return get_int_value("ranks");}
+    Format get_trace_format() const{return format;}
     int get_cpu_tick() const {return int(1000000.0 / get_int_value("cpu_frequency"));}
     int get_core_num() const {return core_num;}
     int get_cacheline_size() const {return cacheline_size;}
-    Format get_trace_format() const{return format;}
-
-    //bool pisa_trace_enabled () const {if(get_int_value("pisa_trace") == 1) return true; return false;}
     bool infinity_llc () const {if(get_int_value("infinity_llc") == 1) return true; return false;}
     long get_expected_limit_insts() const {
       if (contains("expected_limit_insts")) {

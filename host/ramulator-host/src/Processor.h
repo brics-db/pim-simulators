@@ -42,7 +42,6 @@ struct SqueduleQueue{
     }
 };
 
-
 struct line{
     unsigned threadID;
     unsigned processorID;
@@ -51,7 +50,6 @@ struct line{
     unsigned long addr;
     unsigned size;
 };
-
 
 class Trace {
 public:

@@ -174,6 +174,7 @@ void run_cputrace(const Config& configs, Memory<T, Controller>& memory, const st
 //         printf("mem tick: %ld\n", i/1000);
       }
     }
+
     // This a workaround for statistics set only initially lost in the end
     memory.finish();
     Stats::statlist.printall();
@@ -244,7 +245,7 @@ int main(int argc, const char *argv[])
       ("print-cmd-trace", po::value<string>(), "whether print DRAM command to standard output.")
       ("cpu-frequency", po::value<string>(), "define CPU frequency.")
       ("translation", po::value<string>(), "translation mode, selected from: None, Random")
-      ("org", po::value<string>(), "specify DcaRAM organization")
+      ("org", po::value<string>(), "specify DRAM organization")
       ("expected-limit-insts", po::value<string>(), "specify instructions to run for each thread")
       ("no-DRAM-latency", po::value<string>(), "ideal DRAM with zero DRAM access latency (default option turns this off)")
       ("unlimit-bandwidth", po::value<string>(), "ideal DRAM with unlimited bandwidth")
@@ -339,7 +340,6 @@ int main(int argc, const char *argv[])
     const string& core_number = vm["number-cores"].as<string>();
     configs.set_trace_format(trace_format);
     configs.set_core_num(atoi(core_number.c_str()));
-    cerr << "Here 1 \n";
     if (configs["unlimit_bandwidth"] == "true") {
       configs.set("speed", configs["speed"] + "_unlimit_bandwidth");
     }
