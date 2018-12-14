@@ -659,7 +659,6 @@ void Core::tick_inOrder(){
         cpu_inst++;
     }
     else if(req_type == Request::Type::INSTRUCTION){
-        cout << "Here \n";
         if (inserted == window.ipc) return;
 
         Request req(req_addr, Request::Type::READ, callback, id);
