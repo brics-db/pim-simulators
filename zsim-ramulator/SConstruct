@@ -128,7 +128,7 @@ def buildSim(cppFlags, dir, type, pgo=None):
         MBEDTLSPATH = os.environ["MBEDTLSPATH"]
         env["PINLIBPATH"] += [joinpath(MBEDTLSPATH, "library")]
         env["CPPPATH"] += [joinpath(MBEDTLSPATH, "include")]
-        env["PINLIBS"] += ["mbedtls"]
+        env["PINLIBS"] += ["mbedcrypto"]
         env["CPPFLAGS"] += " -D_WITH_MBEDTLS_=1 "
 
     # Only include DRAMSim if available
@@ -146,7 +146,7 @@ def buildSim(cppFlags, dir, type, pgo=None):
 #    env["PINLIBS"] += '-L/usr/lib/x86_64-linux-gnu/hdf5/serial/'
     env["PINLIBS"] += ["hdf5", "hdf5_hl"]
     env["LINKFLAGS"] += " -L/usr/lib/x86_64-linux-gnu/hdf5/serial/"
-    
+
 
     # Harness needs these defined
     env["CPPFLAGS"] += ' -DPIN_PATH="' + joinpath(PINPATH, "intel64/bin/pinbin") + '" '
